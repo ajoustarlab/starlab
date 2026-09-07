@@ -108,7 +108,7 @@ section{padding:88px 0}
 .link-card .lc-a{color:var(--accent-deep);font-size:14px;margin-top:10px;display:inline-block}
 
 /* ---------- PI CARD ---------- */
-.pi{display:grid;grid-template-columns:460px 1fr;gap:36px;align-items:start}
+.pi{display:grid;grid-template-columns:460px 1fr;gap:60px;align-items:start}
 .pi .photo{width:560px;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:3px;background:var(--paper-dim);border:1px solid var(--line)}
 .pi h3{font-size:26px}
 .pi .role{color:var(--accent-deep);font-weight:500;font-size:15px;margin-top:6px}
