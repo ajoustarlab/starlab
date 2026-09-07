@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publications — STAR Lab, Ajou University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ===== COMMON NAV ===== -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">≡</button>
+    <div class="nav-right">
+      <div class="nav-links" id="nl">
+        <a href="index.html" data-en="Home" data-ko="홈">Home</a>
+        <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="publications.html" class="active" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="teaching.html" data-en="Teaching" data-ko="강의">Teaching</a>
+        <a href="gallery.html" data-en="Gallery" data-ko="갤러리">Gallery</a>
+        <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ko">KO</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ===== /COMMON NAV ===== -->
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">// <span data-en="Publications" data-ko="논문">Publications</span></div>
+    <h1 data-en="Selected papers" data-ko="주요 논문">Selected papers</h1>
+    <p data-en="Peer-reviewed research by STAR Lab members. Filter by year, or see the full list on Google Scholar."
+       data-ko="STAR Lab 구성원의 동료심사 논문. 연도별로 필터링하거나 Google Scholar에서 전체 목록을 확인하세요.">Peer-reviewed research by STAR Lab members. Filter by year, or see the full list on Google Scholar.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="filters" id="filters">
+      <button class="fbtn active" data-y="all" data-en="All" data-ko="전체">All</button>
+      <button class="fbtn" data-y="2025">2025</button>
+      <button class="fbtn" data-y="2024">2024</button>
+      <button class="fbtn" data-y="2023">2023</button>
+      <button class="fbtn" data-y="2022">2022</button>
+      <button class="fbtn" data-y="2021">2021</button>
+      <button class="fbtn" data-y="2020">2020</button>
+    </div>
+    <div id="publist"></div>
+    <div class="pub-more"><button id="showall" data-en="Show earlier work (2015–2019)" data-ko="이전 논문 보기 (2015–2019)">Show earlier work (2015–2019)</button></div>
+    <p style="margin-top:40px;color:var(--muted);font-size:15px">
+      <span data-en="Full list on" data-ko="전체 목록:">Full list on</span>
+      <a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ" style="border-bottom:1px solid var(--accent);color:var(--accent-deep)">Google Scholar</a>.
+      <span data-en="Books:" data-ko="저서:">Books:</span> <em>The Charm of Data Science</em> (2nd ed., 2023) · <em>Big Data through Statistics</em> (2016).
+    </p>
+  </div>
+</section>
+
+<!-- ===== COMMON FOOTER ===== -->
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 STAR Lab — STatistical Analysis Research Lab, Ajou University</div>
+    <div><a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ">Google Scholar</a></div>
+  </div>
+</footer>
+<!-- ===== /COMMON FOOTER ===== -->
+
+<script src="assets/site.js"></script>
+<script>
+/* ============================================================
+   PUBLICATION DATA — one line per paper.
+     y : year (number)      h : HTML text (authors, title, venue)
+     e : 1 = "earlier work", hidden until the toggle is clicked
+   To add a paper, copy a line and put it in the right year order.
+   ============================================================ */
+const pubs=[
+{y:2025,h:'SI Pyo, SH Ahn, SS Kwon. Visualization algorithm based on FDR control testing for dimension reduction of textual data. <span class="venue">Data Technologies and Applications</span>.'},
+{y:2025,h:'HJ Joung, SS Kwon, MS Park. Effect of Pilates exercise on balance in adults with cerebral palsy. <span class="venue">Journal of Bodywork and Movement Therapies</span>, 45, 311–318.'},
+{y:2024,h:'D Jung, SS Kwon, SH Ahn. Enhanced trajectory data visualization: a dynamic time warping integrated t-SNE approach. <span class="venue">Communications in Statistics – Simulation and Computation</span>.'},
+{y:2024,h:'S Koh, SI Pyo, S Jang, et al. Shifting perspectives: From "Epilepsy" to "Cerebroelectric Disorder". <span class="venue">Epilepsy &amp; Behavior</span>, 157.'},
+{y:2024,h:'JJ Min, SS Kwon, et al. Changes in femoral anteversion after intramedullary nailing for pediatric femoral shaft fracture. <span class="venue">BMC Musculoskeletal Disorders</span>, 25(1), 534.'},
+{y:2024,h:'J Kang, SS Kwon, YJ Lee. Clinical nurses\' work-life balance prediction using CART analysis. <span class="venue">BMC Nursing</span>, 1–10.'},
+{y:2023,h:'I Kang, H Choi, YJ Yoon, J Park, SS Kwon, C Park. Fréchet distance-based cluster analysis for multi-dimensional functional data. <span class="venue">Statistics and Computing</span>, 33(4), 75.'},
+{y:2023,h:'SS Kwon, H Choi, W Lee, et al. Reformulating land-use regression as sign-constrained regularized regressions. <span class="venue">Environmental Modelling &amp; Software</span>, 162, 105653.'},
+{y:2023,h:'I Kang, C Park, YJ Yoon, C Park, SS Kwon, H Choi. Classification of histogram-valued data with support histogram machines. <span class="venue">Journal of Applied Statistics</span>, 50(3), 675–690.'},
+{y:2023,h:'SS Kwon, JS Kim, MJ Park, et al. Quantile estimation for encrypted data. <span class="venue">Applied Intelligence</span>, 1–10.'},
+{y:2022,h:'JJ Min, SS Kwon, et al. What happens to the patella height in patients with cerebral palsy as they age. <span class="venue">J. Pediatric Orthopaedics B</span>, 31(2), 188–193.'},
+{y:2022,h:'SS Kwon, JD Yoo, SY Lee. Linear mixed modeling on the effects of varus knee surgery on the ankle joint weight-bearing axis. <span class="venue">Foot and Ankle Surgery</span>, 28(1), 114–118.'},
+{y:2022,h:'EJ Oh, JJ Min, SS Kwon, et al. Breech presentation in twins as a risk factor for developmental dysplasia of the hip. <span class="venue">J. Pediatric Orthopedics</span>, 42(1), e55.'},
+{y:2021,h:'JJ Min, SS Kwon, et al. Evaluation of factors affecting external tibial torsion in patients with cerebral palsy. <span class="venue">BMC Musculoskeletal Disorders</span>, 22(1), 1–6.'},
+{y:2021,h:'SY Kim, YI Kim, HJ Kim, et al. New approach of prediction of recurrence in thyroid cancer patients using machine learning. <span class="venue">Medicine</span>, 100(42).'},
+{y:2021,h:'CB Phan, KM Lee, SS Kwon, S Koo. Kinematic instability in the joints of flatfoot subjects during walking: a biplanar fluoroscopic study. <span class="venue">Journal of Biomechanics</span>, 127, 110681.'},
+{y:2020,h:'KH Sung, SS Kwon, et al. Differences in responses to English and Korean versions of the CPCHILD. <span class="venue">Health and Quality of Life Outcomes</span>, 18(1), 1–7.'},
+{y:2020,h:'JJ Min, SS Kwon, et al. Factors affecting subjective symptoms in children with pes planovalgus deformity. <span class="venue">JBJS</span>, 102(17), 1479–1485.'},
+{y:2020,h:'SS Kwon, H Kim, SJ Shin, SY Lee. Optimization of tenocyte lineage-related factors from tonsil-derived mesenchymal stem cells using response surface methodology. <span class="venue">J. Orthopaedic Surgery and Research</span>, 15, 1–9.'},
+{y:2019,e:1,h:'SY Kim, SS Kwon, et al. Cost for treatment and follow-up of thyroid cancer increases according to disease severity. <span class="venue">Head and Neck</span>, 41(7).'},
+{y:2018,e:1,h:'SS Kwon, MH Nam, MS Park, et al. Short-term outcomes and influencing factors after ankle fracture surgery. <span class="venue">J. Foot &amp; Ankle Surgery</span>, 57(6), 1096–1100.'},
+{y:2018,e:1,h:'SH Park, JH Oh, SS Kwon. Graphical evaluation of robust parameter designs based on extended prediction variance. <span class="venue">Communications in Statistics – Theory and Methods</span>.'},
+{y:2017,e:1,h:'SH Park, JH Oh, SS Kwon. Extended scaled prediction variance optimality for modified central composite design. <span class="venue">Communications in Statistics – Theory and Methods</span>, 46(19), 9614–9624.'},
+{y:2016,e:1,h:'SS Kwon, TH Kim, SY Lee, SJ Sin. Is central skeleton bone quality a predictor of the severity of proximal humeral fractures? <span class="venue">Injury</span>, 2777–2782.'},
+{y:2015,e:1,h:'YS Lee, SS Kwon, C O\'Sullivan, et al. Push-recovery stability of biped locomotion. <span class="venue">ACM Transactions on Graphics</span>, 34(6), 180–189.'},
+{y:2015,e:1,h:'SS Kwon, YM Ko, HY Seon, et al. Geographic distribution of urologists in Korea, 2007–2012. <span class="venue">J. Korean Medical Science</span>, 30(11), 1638–1645.'},
+];
+
+const list=document.getElementById('publist');
+let filter='all', showEarly=false;
+function render(){
+  list.innerHTML=pubs.filter(p=>{
+    if(!showEarly && p.e) return false;
+    if(filter!=='all' && String(p.y)!==filter) return false;
+    return true;
+  }).map(p=>`<div class="pub"><div class="yr">${p.y}</div><div class="body">${p.h}</div></div>`).join('')
+  || '<div class="pub"><div class="yr"></div><div class="body" style="color:var(--muted)">—</div></div>';
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  if(!e.target.classList.contains('fbtn'))return;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  filter=e.target.dataset.y; render();
+});
+document.getElementById('showall').addEventListener('click',e=>{
+  showEarly=!showEarly;
+  const b=e.target;
+  b.setAttribute('data-en', showEarly?'Hide earlier work':'Show earlier work (2015–2019)');
+  b.setAttribute('data-ko', showEarly?'이전 논문 접기':'이전 논문 보기 (2015–2019)');
+  b.textContent = (localStorage.getItem('starlab-lang')==='ko')
+    ? b.getAttribute('data-ko') : b.getAttribute('data-en');
+  render();
+});
+render();
+</script>
+</body>
+</html>

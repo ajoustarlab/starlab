@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching — STAR Lab, Ajou University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ===== COMMON NAV ===== -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">≡</button>
+    <div class="nav-right">
+      <div class="nav-links" id="nl">
+        <a href="index.html" data-en="Home" data-ko="홈">Home</a>
+        <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="publications.html" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="teaching.html" class="active" data-en="Teaching" data-ko="강의">Teaching</a>
+        <a href="gallery.html" data-en="Gallery" data-ko="갤러리">Gallery</a>
+        <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ko">KO</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ===== /COMMON NAV ===== -->
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">// <span data-en="Teaching" data-ko="강의">Teaching</span></div>
+    <h1 data-en="Courses" data-ko="담당 강의">Courses</h1>
+    <p data-en="Undergraduate and graduate courses taught by lab members."
+       data-ko="연구실 구성원이 담당하는 학부·대학원 강의.">Undergraduate and graduate courses taught by lab members.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap" style="max-width:760px">
+    <!-- ============================================================
+         COURSES — edit / add rows here.
+         Each row: course name (with data-en/data-ko) + sub-label.
+         ============================================================ -->
+    <div class="tlist">
+      <div>
+        <span data-en="Calculus" data-ko="미적분학">Calculus</span>
+        <div class="tsub" data-en="Undergraduate · Dept. of Mathematics" data-ko="학부 · 수학과">Undergraduate · Dept. of Mathematics</div>
+      </div>
+      <div>
+        <span data-en="Mathematics 1" data-ko="수학 1">Mathematics 1</span>
+        <div class="tsub" data-en="Undergraduate · Dept. of Mathematics" data-ko="학부 · 수학과">Undergraduate · Dept. of Mathematics</div>
+      </div>
+      <div>
+        <span data-en="Statistics &amp; Data Science" data-ko="통계 · 데이터사이언스">Statistics &amp; Data Science</span>
+        <div class="tsub" data-en="Graduate methodology courses" data-ko="대학원 방법론 강의">Graduate methodology courses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMON FOOTER ===== -->
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 STAR Lab — STatistical Analysis Research Lab, Ajou University</div>
+    <div><a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ">Google Scholar</a></div>
+  </div>
+</footer>
+<!-- ===== /COMMON FOOTER ===== -->
+
+<script src="assets/site.js"></script>
+</body>
+</html>

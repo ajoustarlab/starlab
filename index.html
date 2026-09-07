@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAR Lab — STatistical Analysis Research Lab, Ajou University</title>
+<meta name="description" content="STatistical Analysis Research Lab (STAR Lab), Department of Mathematics, Ajou University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ===== COMMON NAV (same on every page — if you change it, change it on all pages) ===== -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">≡</button>
+    <div class="nav-right">
+      <div class="nav-links" id="nl">
+        <a href="index.html" class="active" data-en="Home" data-ko="홈">Home</a>
+        <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="publications.html" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="teaching.html" data-en="Teaching" data-ko="강의">Teaching</a>
+        <a href="gallery.html" data-en="Gallery" data-ko="갤러리">Gallery</a>
+        <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ko">KO</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ===== /COMMON NAV ===== -->
+
+<header class="hero">
+  <canvas id="scatter"></canvas>
+  <div class="wrap hero-in">
+    <div class="eyebrow">STatistical Analysis Research Lab · Ajou University</div>
+    <h1 data-en="Finding <em>structure</em> in complex data."
+        data-ko="복잡한 데이터에서 <em>구조</em>를 찾습니다.">Finding <em>structure</em> in complex data.</h1>
+    <p data-en="We develop statistical methodology for large, high-dimensional data in medicine, nursing, and environmental science — turning messy observations into decisions you can trust."
+       data-ko="의학·간호·환경 분야의 크고 고차원적인 데이터를 위한 통계 방법론을 개발합니다. 복잡한 관측을 신뢰할 수 있는 결정으로 바꿉니다.">We develop statistical methodology for large, high-dimensional data in medicine, nursing, and environmental science — turning messy observations into decisions you can trust.</p>
+    <div class="cta">
+      <a href="publications.html" class="btn btn-solid" data-en="See publications" data-ko="논문 보기">See publications</a>
+      <a href="contact.html" class="btn btn-ghost" data-en="Join the lab" data-ko="합류하기">Join the lab</a>
+    </div>
+  </div>
+</header>
+
+<!-- RESEARCH / ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="sec-kicker">// <span data-en="Research" data-ko="연구">Research</span></div>
+        <h2 class="sec-head" style="margin-bottom:28px"
+            data-en="Statistical methodology for real-world data"
+            data-ko="현실 데이터를 위한 통계 방법론">Statistical methodology for real-world data</h2>
+        <p class="lead"
+           data-en="As data grows in volume and complexity, uncovering its underlying patterns becomes essential. STAR Lab studies systematic statistical methods to support decision-making from the large, complex datasets common in medicine, nursing, and environmental science."
+           data-ko="데이터의 양과 복잡성이 커질수록 그 안의 패턴을 밝혀내는 일이 중요해집니다. STAR Lab은 의학·간호·환경 분야에서 흔히 마주치는 크고 복잡한 데이터로부터 의사결정을 돕는 체계적인 통계 방법을 연구합니다.">As data grows in volume and complexity, uncovering its underlying patterns becomes essential. STAR Lab studies systematic statistical methods to support decision-making from the large, complex datasets common in medicine, nursing, and environmental science.</p>
+        <p class="lead"
+           data-en="Our work spans medical statistics, statistical learning for big data, functional and longitudinal data analysis, and dimension reduction for text — with a consistent emphasis on developing new methodology, not just applying existing tools."
+           data-ko="우리의 연구는 의학통계, 빅데이터를 위한 통계적 학습, 함수형·종단 자료 분석, 텍스트 차원 축소에 걸쳐 있으며, 기존 도구의 적용에 그치지 않고 새로운 방법론의 개발에 일관되게 초점을 둡니다.">Our work spans medical statistics, statistical learning for big data, functional and longitudinal data analysis, and dimension reduction for text — with a consistent emphasis on developing new methodology, not just applying existing tools.</p>
+        <div class="tags">
+          <span class="tag">Medical Statistics</span>
+          <span class="tag">Statistical Learning</span>
+          <span class="tag">Functional Data</span>
+          <span class="tag">Longitudinal Data</span>
+          <span class="tag">Text Mining</span>
+          <span class="tag">Dimension Reduction</span>
+        </div>
+      </div>
+      <aside class="stat-card">
+        <h3 data-en="At a glance" data-ko="한눈에">At a glance</h3>
+        <div class="stat-row"><span class="k" data-en="Peer-reviewed papers" data-ko="논문">Peer-reviewed papers</span><span class="v">70+</span></div>
+        <div class="stat-row"><span class="k" data-en="Active researchers" data-ko="연구원">Active researchers</span><span class="v">7</span></div>
+        <div class="stat-row"><span class="k" data-en="Books authored" data-ko="저서">Books authored</span><span class="v">2</span></div>
+        <div class="stat-row"><span class="k" data-en="Funded projects" data-ko="연구과제">Funded projects</span><span class="v">15+</span></div>
+      </aside>
+    </div>
+
+    <div class="home-cta">
+      <a class="link-card" href="people.html">
+        <div class="lc-k">01</div>
+        <div class="lc-t" data-en="People" data-ko="구성원">People</div>
+        <div class="lc-a" data-en="Meet the team →" data-ko="구성원 보기 →">Meet the team →</div>
+      </a>
+      <a class="link-card" href="publications.html">
+        <div class="lc-k">02</div>
+        <div class="lc-t" data-en="Publications" data-ko="논문">Publications</div>
+        <div class="lc-a" data-en="Recent papers →" data-ko="최근 논문 →">Recent papers →</div>
+      </a>
+      <a class="link-card" href="gallery.html">
+        <div class="lc-k">03</div>
+        <div class="lc-t" data-en="Gallery" data-ko="갤러리">Gallery</div>
+        <div class="lc-a" data-en="Lab moments →" data-ko="연구실 사진 →">Lab moments →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMON FOOTER (same on every page) ===== -->
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 STAR Lab — STatistical Analysis Research Lab, Ajou University</div>
+    <div><a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ">Google Scholar</a></div>
+  </div>
+</footer>
+<!-- ===== /COMMON FOOTER ===== -->
+
+<script src="assets/site.js"></script>
+</body>
+</html>

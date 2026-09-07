@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — STAR Lab, Ajou University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ===== COMMON NAV ===== -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">≡</button>
+    <div class="nav-right">
+      <div class="nav-links" id="nl">
+        <a href="index.html" data-en="Home" data-ko="홈">Home</a>
+        <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="publications.html" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="teaching.html" data-en="Teaching" data-ko="강의">Teaching</a>
+        <a href="gallery.html" class="active" data-en="Gallery" data-ko="갤러리">Gallery</a>
+        <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ko">KO</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ===== /COMMON NAV ===== -->
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">// <span data-en="Gallery" data-ko="갤러리">Gallery</span></div>
+    <h1 data-en="Lab moments" data-ko="연구실 갤러리">Lab moments</h1>
+    <p data-en="Conferences, seminars, and life around the lab. Click any photo to enlarge."
+       data-ko="학회, 세미나, 그리고 연구실의 순간들. 사진을 클릭하면 크게 볼 수 있습니다.">Conferences, seminars, and life around the lab. Click any photo to enlarge.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="gallery-grid" id="gallery"></div>
+    <p id="empty-note" style="display:none;color:var(--muted);font-size:15px;margin-top:20px"
+       data-en="No photos yet. Upload images to images/gallery/ and list them in the array below."
+       data-ko="아직 사진이 없습니다. images/gallery/ 폴더에 사진을 올리고 아래 배열에 추가하세요.">No photos yet.</p>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="x" onclick="closeLb()">×</button>
+  <button class="nav-arrow prev" onclick="stepLb(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="nav-arrow next" onclick="stepLb(1)">›</button>
+  <div class="cap" id="lb-cap"></div>
+</div>
+
+<!-- ===== COMMON FOOTER ===== -->
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 STAR Lab — STatistical Analysis Research Lab, Ajou University</div>
+    <div><a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ">Google Scholar</a></div>
+  </div>
+</footer>
+<!-- ===== /COMMON FOOTER ===== -->
+
+<script src="assets/site.js"></script>
+<script>
+/* ============================================================
+   GALLERY PHOTOS — edit this array.
+     file    : filename in images/gallery/
+     captionEn / captionKo : caption text (optional)
+   To add a photo: upload it to images/gallery/ then add a line here.
+   ============================================================ */
+const photos = [
+  // Example entries — replace 'file' with your real uploaded filenames:
+  {file:'photo1.jpg', captionEn:'KSS Annual Meeting, 2025', captionKo:'한국통계학회 정기총회, 2025'},
+  {file:'photo2.jpg', captionEn:'Lab seminar',              captionKo:'연구실 세미나'},
+  {file:'photo3.jpg', captionEn:'Conference trip',          captionKo:'학회 참석'},
+  {file:'photo4.jpg', captionEn:'Group dinner',             captionKo:'회식'},
+  {file:'photo5.jpg', captionEn:'Poster session',           captionKo:'포스터 세션'},
+  {file:'photo6.jpg', captionEn:'Graduation',               captionKo:'졸업'},
+];
+
+const grid = document.getElementById('gallery');
+const lang = () => (localStorage.getItem('starlab-lang')||'en');
+function cap(p){ return (lang()==='ko' ? p.captionKo : p.captionEn) || ''; }
+
+grid.innerHTML = photos.map((p,i)=>`
+  <div class="gcard" onclick="openLb(${i})">
+    <img src="images/gallery/${p.file}" alt="${p.captionEn||''}"
+         onerror="this.closest('.gcard').style.display='none';checkEmpty()">
+    ${(p.captionEn||p.captionKo)?`<div class="cap" data-en="${p.captionEn||''}" data-ko="${p.captionKo||''}">${cap(p)}</div>`:''}
+  </div>`).join('');
+
+function checkEmpty(){
+  const visible = [...document.querySelectorAll('.gcard')].some(c=>c.style.display!=='none');
+  document.getElementById('empty-note').style.display = visible ? 'none' : 'block';
+}
+
+/* ---- Lightbox ---- */
+let lbIndex = 0;
+function openLb(i){
+  lbIndex = i;
+  showLb();
+  document.getElementById('lightbox').classList.add('open');
+}
+function showLb(){
+  const p = photos[lbIndex];
+  document.getElementById('lb-img').src = 'images/gallery/'+p.file;
+  document.getElementById('lb-cap').textContent = cap(p);
+}
+function stepLb(d){
+  lbIndex = (lbIndex + d + photos.length) % photos.length;
+  showLb();
+}
+function closeLb(){ document.getElementById('lightbox').classList.remove('open'); }
+document.getElementById('lightbox').addEventListener('click', e=>{
+  if(e.target.id==='lightbox') closeLb();
+});
+document.addEventListener('keydown', e=>{
+  if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')stepLb(-1);
+  if(e.key==='ArrowRight')stepLb(1);
+});
+
+if(window.setLang){ try{ window.setLang(lang()); }catch(e){} }
+</script>
+</body>
+</html>
