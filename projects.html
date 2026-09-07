@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — STAR Lab, Ajou University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ===== COMMON NAV (same on every page) ===== -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">≡</button>
+    <div class="nav-right">
+      <div class="nav-links" id="nl">
+        <a href="index.html" data-en="Home" data-ko="홈">Home</a>
+        <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="projects.html" class="active" data-en="Projects" data-ko="연구과제">Projects</a>
+        <a href="publications.html" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="presentations.html" data-en="Presentations" data-ko="학회발표">Presentations</a>
+        <a href="teaching.html" data-en="Teaching" data-ko="강의">Teaching</a>
+        <a href="gallery.html" data-en="Gallery" data-ko="갤러리">Gallery</a>
+        <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ko">KO</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ===== /COMMON NAV ===== -->
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">// <span data-en="Projects" data-ko="연구과제">Projects</span></div>
+    <h1 data-en="Research projects &amp; grants" data-ko="연구과제 및 수주">Research projects &amp; grants</h1>
+    <p data-en="Funded research projects, with role and period."
+       data-ko="수행 연구과제 — 역할과 수행 기간.">Funded research projects, with role and period.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <!-- ============================================================
+         PROJECTS — 데이터 배열을 아래 스크립트에서 편집.
+         role: 'pi'(책임) / 'co'(공동) / 'part'(참여)
+         ============================================================ -->
+    <div id="projlist"></div>
+  </div>
+</section>
+
+<!-- ===== COMMON FOOTER ===== -->
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 STAR Lab — STatistical Analysis Research Lab, Ajou University</div>
+    <div><a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ">Google Scholar</a></div>
+  </div>
+</footer>
+<!-- ===== /COMMON FOOTER ===== -->
+
+<script src="assets/site.js"></script>
+<script>
+/* ============================================================
+   PROJECT DATA — one object per project.
+     titleKo / titleEn : project title
+     agencyKo / agencyEn : funding agency
+     period : display string (dates)
+     role : 'pi' (책임/PI), 'co' (공동/Co-PI), 'part' (참여/Participant)
+   Order: newest first.
+   ============================================================ */
+const projects = [
+  {titleKo:'대용량 다차원 텐서에서 수리적 모델링 개발 및 응용',
+   titleEn:'Development and application of mathematical modeling for large-scale multi-dimensional tensors',
+   agencyKo:'한국연구재단', agencyEn:'National Research Foundation of Korea (NRF)',
+   period:'2025.03 – 2029.02', role:'pi'},
+
+  {titleKo:'BK21 4단계 — 아주 수리과학 미래인재양성 교육연구팀',
+   titleEn:'BK21 FOUR — Ajou Mathematical Sciences Future Talent Education & Research Team',
+   agencyKo:'한국연구재단', agencyEn:'National Research Foundation of Korea (NRF)',
+   period:'2024.03 – 2027.08', role:'co'},
+
+  {titleKo:'기초과학연구소',
+   titleEn:'Basic Science Research Institute',
+   agencyKo:'한국연구재단', agencyEn:'National Research Foundation of Korea (NRF)',
+   period:'2021.03 – 2026.02', role:'co'},
+
+  {titleKo:'인공지능융합혁신인재양성',
+   titleEn:'AI Convergence Innovative Talent Development',
+   agencyKo:'정보통신기획평가원 (IITP)', agencyEn:'Institute of Information & Communications Technology Planning & Evaluation (IITP)',
+   period:'2023.07 – 2024.12', role:'co'},
+
+  {titleKo:'BK21 4단계 — Ajou DREAM 인공지능 혁신인재 양성사업단',
+   titleEn:'BK21 FOUR — Ajou DREAM AI Innovative Talent Development Center',
+   agencyKo:'한국연구재단', agencyEn:'National Research Foundation of Korea (NRF)',
+   period:'2020.09 – 2024.08', role:'co'},
+
+  {titleKo:'한국인 갑상선암 환자 프로파일링 및 일반화 혼합모형에 기반한 예후 예측 모델 개발',
+   titleEn:'Profiling of Korean thyroid cancer patients and development of a prognostic prediction model based on generalized mixture models',
+   agencyKo:'한국연구재단', agencyEn:'National Research Foundation of Korea (NRF)',
+   period:'2017.09 – 2022.08', role:'pi'},
+
+  {titleKo:'의료데이터를 위한 통계적 모델링과 기계학습 모델링의 효율적인 통합적 방법론 연구',
+   titleEn:'An efficient integrated methodology of statistical modeling and machine learning modeling for medical data',
+   agencyKo:'아주대학교', agencyEn:'Ajou University',
+   period:'2018.10 – 2020.09', role:'pi'},
+
+  {titleKo:'보건의료 데이터 예측 모형을 위한 통계적 방법론 연구',
+   titleEn:'Statistical methodology for prediction models in healthcare data',
+   agencyKo:'아주대학교', agencyEn:'Ajou University',
+   period:'2019.10 – 2022.09', role:'co'},
+
+  {titleKo:'센서퓨전을 통한 3D 물체 인식 알고리즘 개발 및 실무교육개발',
+   titleEn:'Development of a 3D object recognition algorithm via sensor fusion and practical training',
+   agencyKo:'미래형자동차 R&D 전문인력 양성사업', agencyEn:'Future Automotive R&D Professional Training Program',
+   period:'2019.12 – 2020.02', role:'part'},
+
+  {titleKo:'퇴행성 관절염의 위험 인자 파악을 통한 코호트 모집 및 조기 진단·예측 시스템 개발',
+   titleEn:'Cohort recruitment and development of an early diagnosis & prediction system through risk-factor identification for osteoarthritis',
+   agencyKo:'한국연구재단', agencyEn:'National Research Foundation of Korea (NRF)',
+   period:'2017.06 – 2022.06', role:'part'},
+
+  {titleKo:'유압브레이커에서 발생하는 하자원인 예측 모델 설계 및 로직 설계',
+   titleEn:'Design of a defect-cause prediction model and logic for hydraulic breakers',
+   agencyKo:'㈜수산중공업', agencyEn:'Soosan Heavy Industries',
+   period:'2019.02 – 2019.05', role:'pi'},
+
+  {titleKo:'공급망 관리에서 수요 예측값 모델 정교화와 주문 추천 로직 설계',
+   titleEn:'Refinement of demand-forecasting models and design of order-recommendation logic for supply chain management',
+   agencyKo:'엠즈푸드시스템', agencyEn:'MZ Food System',
+   period:'2019.01 – 2019.06', role:'pi'},
+
+  {titleKo:'공급망 관리에서 수요 예측 시스템과 주문 추천 시스템 로직 설계',
+   titleEn:'Design of a demand-forecasting system and order-recommendation system logic for supply chain management',
+   agencyKo:'엠즈푸드시스템', agencyEn:'MZ Food System',
+   period:'2018.07 – 2019.02', role:'pi'},
+
+  {titleKo:'빅데이터 기반 지능형 CCTV 영상 검색 및 법보행 신원확인 기술개발',
+   titleEn:'Big-data-based intelligent CCTV video retrieval and forensic-gait identification technology',
+   agencyKo:'경찰청', agencyEn:'Korean National Police Agency',
+   period:'2018.02 – 2020.06', role:'part'},
+
+  {titleKo:'로버스트한 중심합성계획과 반응표면 실험설계: 발목관절모델 응용',
+   titleEn:'Robust central composite design and response surface methodology: application to an ankle-joint model',
+   agencyKo:'아주대학교', agencyEn:'Ajou University',
+   period:'2015.09 – 2017.09', role:'pi'},
+];
+
+const roleLabel = {
+  pi:   {en:'PI',          ko:'책임', cls:'role-pi'},
+  co:   {en:'Co-PI',       ko:'공동', cls:'role-co'},
+  part: {en:'Participant', ko:'참여', cls:'role-part'},
+};
+
+document.getElementById('projlist').innerHTML = projects.map(p=>{
+  const r = roleLabel[p.role] || roleLabel.part;
+  return `<div class="proj">
+    <div>
+      <div class="p-title" data-en="${p.titleEn.replace(/"/g,'&quot;')}" data-ko="${p.titleKo.replace(/"/g,'&quot;')}">${p.titleKo}</div>
+      <div class="p-meta"><span data-en="${p.agencyEn.replace(/"/g,'&quot;')}" data-ko="${p.agencyKo.replace(/"/g,'&quot;')}">${p.agencyKo}</span> · ${p.period}</div>
+    </div>
+    <div class="p-role ${r.cls}" data-en="${r.en}" data-ko="${r.ko}">${r.ko}</div>
+  </div>`;
+}).join('');
+
+if(window.setLang){ try{ window.setLang(localStorage.getItem('starlab-lang')||'en'); }catch(e){} }
+</script>
+</body>
+</html>

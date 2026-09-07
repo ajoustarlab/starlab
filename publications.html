@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- ===== COMMON NAV ===== -->
+<!-- ===== COMMON NAV (same on every page) ===== -->
 <nav>
   <div class="wrap nav-in">
     <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
@@ -21,7 +21,9 @@
       <div class="nav-links" id="nl">
         <a href="index.html" data-en="Home" data-ko="홈">Home</a>
         <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="projects.html" data-en="Projects" data-ko="연구과제">Projects</a>
         <a href="publications.html" class="active" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="presentations.html" data-en="Presentations" data-ko="학회발표">Presentations</a>
         <a href="teaching.html" data-en="Teaching" data-ko="강의">Teaching</a>
         <a href="gallery.html" data-en="Gallery" data-ko="갤러리">Gallery</a>
         <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
@@ -38,9 +40,9 @@
 <header class="page-head">
   <div class="wrap">
     <div class="eyebrow">// <span data-en="Publications" data-ko="논문">Publications</span></div>
-    <h1 data-en="Selected papers" data-ko="주요 논문">Selected papers</h1>
-    <p data-en="Peer-reviewed research by STAR Lab members. Filter by year, or see the full list on Google Scholar."
-       data-ko="STAR Lab 구성원의 동료심사 논문. 연도별로 필터링하거나 Google Scholar에서 전체 목록을 확인하세요.">Peer-reviewed research by STAR Lab members. Filter by year, or see the full list on Google Scholar.</p>
+    <h1 data-en="Publications" data-ko="논문">Publications</h1>
+    <p data-en="Peer-reviewed papers, books, and patents. Filter by year, or see the full list on Google Scholar."
+       data-ko="동료심사 논문, 저서, 특허. 연도별로 필터링하거나 Google Scholar에서 전체 목록을 확인하세요.">Peer-reviewed papers, books, and patents. Filter by year, or see the full list on Google Scholar.</p>
   </div>
 </header>
 
@@ -48,21 +50,25 @@
   <div class="wrap">
     <div class="filters" id="filters">
       <button class="fbtn active" data-y="all" data-en="All" data-ko="전체">All</button>
-      <button class="fbtn" data-y="2026">2026</button>
       <button class="fbtn" data-y="2025">2025</button>
       <button class="fbtn" data-y="2024">2024</button>
       <button class="fbtn" data-y="2023">2023</button>
       <button class="fbtn" data-y="2022">2022</button>
       <button class="fbtn" data-y="2021">2021</button>
       <button class="fbtn" data-y="2020">2020</button>
+      <button class="fbtn" data-y="books" data-en="Books" data-ko="저서">Books</button>
+      <button class="fbtn" data-y="patents" data-en="Patents" data-ko="특허">Patents</button>
     </div>
+
     <div id="publist"></div>
-    <div class="pub-more"><button id="showall" data-en="Show earlier work (2015–2019)" data-ko="이전 논문 보기 (2015–2019)">Show earlier work (2015–2019)</button></div>
-    <p style="margin-top:40px;color:var(--muted);font-size:15px">
+    <div class="pub-more" id="morewrap"><button id="showall" data-en="Show earlier work (2015-2019)" data-ko="이전 논문 보기 (2015-2019)">Show earlier work (2015-2019)</button></div>
+    <p id="scholarnote" style="margin-top:40px;color:var(--muted);font-size:15px">
       <span data-en="Full list on" data-ko="전체 목록:">Full list on</span>
       <a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ" style="border-bottom:1px solid var(--accent);color:var(--accent-deep)">Google Scholar</a>.
-      <span data-en="Books:" data-ko="저서:">Books:</span> <em>The Charm of Data Science</em> (2nd ed., 2023) · <em>Big Data through Statistics</em> (2016).
     </p>
+
+    <div id="booklist" style="display:none"></div>
+    <div id="patentlist" style="display:none"></div>
   </div>
 </section>
 
@@ -77,68 +83,149 @@
 
 <script src="assets/site.js"></script>
 <script>
-/* ============================================================
-   PUBLICATION DATA — one line per paper.
-     y : year (number)      h : HTML text (authors, title, venue)
-     e : 1 = "earlier work", hidden until the toggle is clicked
-   To add a paper, copy a line and put it in the right year order.
-   ============================================================ */
 const pubs=[
-{y:2026,h:'S Jang, SI Pyo, EJ Kim, W Lee, SS Kwon. Stroke risk following BNT162b2 vaccination: a systematic review and meta-analysis of self-controlled case series studies. <span class="venue">Expert Review of Vaccines</span>, 25 (1), 2720955.'},
-{y:2025,h:'SI Pyo, SH Ahn, SS Kwon. Visualization algorithm based on FDR control testing for dimension reduction of textual data. <span class="venue">Data Technologies and Applications</span>.'},
-{y:2025,h:'HJ Joung, SS Kwon, MS Park. Effect of Pilates exercise on balance in adults with cerebral palsy. <span class="venue">Journal of Bodywork and Movement Therapies</span>, 45, 311–318.'},
-{y:2024,h:'D Jung, SS Kwon, SH Ahn. Enhanced trajectory data visualization: a dynamic time warping integrated t-SNE approach. <span class="venue">Communications in Statistics – Simulation and Computation</span>.'},
-{y:2024,h:'S Koh, SI Pyo, S Jang, et al. Shifting perspectives: From "Epilepsy" to "Cerebroelectric Disorder". <span class="venue">Epilepsy &amp; Behavior</span>, 157.'},
-{y:2024,h:'JJ Min, SS Kwon, et al. Changes in femoral anteversion after intramedullary nailing for pediatric femoral shaft fracture. <span class="venue">BMC Musculoskeletal Disorders</span>, 25(1), 534.'},
-{y:2024,h:'J Kang, SS Kwon, YJ Lee. Clinical nurses\' work-life balance prediction using CART analysis. <span class="venue">BMC Nursing</span>, 1–10.'},
-{y:2023,h:'I Kang, H Choi, YJ Yoon, J Park, SS Kwon, C Park. Fréchet distance-based cluster analysis for multi-dimensional functional data. <span class="venue">Statistics and Computing</span>, 33(4), 75.'},
-{y:2023,h:'SS Kwon, H Choi, W Lee, et al. Reformulating land-use regression as sign-constrained regularized regressions. <span class="venue">Environmental Modelling &amp; Software</span>, 162, 105653.'},
-{y:2023,h:'I Kang, C Park, YJ Yoon, C Park, SS Kwon, H Choi. Classification of histogram-valued data with support histogram machines. <span class="venue">Journal of Applied Statistics</span>, 50(3), 675–690.'},
-{y:2023,h:'SS Kwon, JS Kim, MJ Park, et al. Quantile estimation for encrypted data. <span class="venue">Applied Intelligence</span>, 1–10.'},
-{y:2022,h:'JJ Min, SS Kwon, et al. What happens to the patella height in patients with cerebral palsy as they age. <span class="venue">J. Pediatric Orthopaedics B</span>, 31(2), 188–193.'},
-{y:2022,h:'SS Kwon, JD Yoo, SY Lee. Linear mixed modeling on the effects of varus knee surgery on the ankle joint weight-bearing axis. <span class="venue">Foot and Ankle Surgery</span>, 28(1), 114–118.'},
-{y:2022,h:'EJ Oh, JJ Min, SS Kwon, et al. Breech presentation in twins as a risk factor for developmental dysplasia of the hip. <span class="venue">J. Pediatric Orthopedics</span>, 42(1), e55.'},
-{y:2021,h:'JJ Min, SS Kwon, et al. Evaluation of factors affecting external tibial torsion in patients with cerebral palsy. <span class="venue">BMC Musculoskeletal Disorders</span>, 22(1), 1–6.'},
-{y:2021,h:'SY Kim, YI Kim, HJ Kim, et al. New approach of prediction of recurrence in thyroid cancer patients using machine learning. <span class="venue">Medicine</span>, 100(42).'},
+{y:2025,h:'SI Pyo, SH Ahn, SS Kwon. Visualization algorithm based on FDR control testing for dimension reduction of textual data. <span class="venue">Data Technologies and Applications</span>, 1-24.'},
+{y:2025,h:'HJ Joung, SS Kwon, MS Park. Effect of Pilates exercise on balance in adults with cerebral palsy. <span class="venue">Journal of Bodywork and Movement Therapies</span>, 45, 311-318.'},
+{y:2025,h:'S Jang, SI Pyo, EJ Kim, W Lee, SS Kwon. <a href="https://scholar.google.co.kr/citations?view_op=view_citation&hl=ko&user=JSOv5boAAAAJ&sortby=pubdate&citation_for_view=JSOv5boAAAAJ:5awf1xo2G04C" target="_blank" rel="noopener">Stroke risk following BNT162b2 vaccination: a systematic review and meta-analysis of self-controlled case series studies</a>. <span class="venue">Expert Review of Vaccines</span>, 25(1), 2720955.'},
+{y:2024,h:'D Jung, SS Kwon, SH Ahn. Enhanced trajectory data visualization: a dynamic time warping integrated t-SNE approach with real-data applications. <span class="venue">Communications in Statistics - Simulation and Computation</span>, 1-14.'},
+{y:2024,h:'S Koh, SI Pyo, S Jang, G Kim, S Seo, K Huh, SS Kwon, JY Choi. Shifting perspectives: From "Epilepsy" to "Cerebroelectric Disorder". <span class="venue">Epilepsy &amp; Behavior</span>, 157.'},
+{y:2024,h:'JJ Min, SS Kwon, K Youn, D Kim, KH Sung, MS Park. Changes in femoral anteversion after intramedullary nailing for pediatric femoral shaft fracture: a multicenter study. <span class="venue">BMC Musculoskeletal Disorders</span>, 25(1), 534.'},
+{y:2024,h:'J Kang, SS Kwon, YJ Lee. Clinical nurses\' work-life balance prediction due to patient safety incidents using classification and regression tree analysis: a secondary data analysis. <span class="venue">BMC Nursing</span>, 1-10.'},
+{y:2023,h:'I Kang, H Choi, YJ Yoon, J Park, SS Kwon, C Park. Frechet distance-based cluster analysis for multi-dimensional functional data. <span class="venue">Statistics and Computing</span>, 33(4), 75.'},
+{y:2023,h:'SS Kwon, H Choi, W Lee, Y Kim, HC Kim, W Lee. Reformulating land-use regression method as sign-constrained regularized regressions: Advantages and improvements. <span class="venue">Environmental Modelling &amp; Software</span>, 162, 105653.'},
+{y:2023,h:'I Kang, C Park, YJ Yoon, C Park, SS Kwon, H Choi. Classification of histogram-valued data with support histogram machines. <span class="venue">Journal of Applied Statistics</span>, 50(3), 675-690.'},
+{y:2023,h:'SS Kwon, JS Kim, MJ Park, CW Park, SC Shin, JJ Jeon, HS Choi. Quantile estimation for encrypted data. <span class="venue">Applied Intelligence</span>, 1-10.'},
+{y:2022,h:'JJ Min, SS Kwon, KH Sung, KM Lee, H Lee, CY Chung, MS Park. What happens to the patella height in patients with cerebral palsy as they age. <span class="venue">Journal of Pediatric Orthopaedics B</span>, 31(2), 188-193.'},
+{y:2022,h:'NT Kim, SS Kwon, MS Park, KM Lee, KH Sung. National Trends in Pediatric CT Scans in South Korea: A Nationwide Cohort Study. <span class="venue">Journal of the Korean Society of Radiology</span>, 83(1).'},
+{y:2022,h:'EJ Oh, JJ Min, SS Kwon, SB Kim, CW Choi, YH Jung, KJ Oh, JY Park, MS Park. Breech Presentation in Twins as a Risk Factor for Developmental Dysplasia of the Hip. <span class="venue">Journal of Pediatric Orthopedics</span>, 42(1), e55.'},
+{y:2022,h:'SS Kwon, JD Yoo, SY Lee. Linear mixed modeling on the effects of varus knee surgery on the ankle joint weight-bearing axis. <span class="venue">Foot and Ankle Surgery</span>, 28(1), 114-118.'},
+{y:2022,h:'SS Kwon, NC Kim, MS Park, KM Lee, KH Sung. National Trends in Pediatric CT Scans in South Korea: A Nationwide Cohort Study. <span class="venue">Korean Journal of Radiology</span>, 1-11.'},
+{y:2021,h:'JJ Min, SS Kwon, KT Kim, Y Choi, KH Sung, KM Lee, MS Park. Evaluation of factors affecting external tibial torsion in patients with cerebral palsy. <span class="venue">BMC Musculoskeletal Disorders</span>, 22(1), 1-6.'},
+{y:2021,h:'SH Moon, SS Kwon, MS Park, NT Kim, KH Sung. Change of limb alignment in Korean children and adolescents with idiopathic genu valgum. <span class="venue">Medicine</span>, 100(45).'},
+{y:2021,h:'NT Kim, SS Kwon, KJ Choi, MS Park, JY Chung, HS Han, KH Sung. Effect of screw configuration on the rate of correction for guided growth using the tension-band plate. <span class="venue">Journal of Pediatric Orthopaedics</span>, 41(10), e899-e903.'},
 {y:2021,h:'CB Phan, KM Lee, SS Kwon, S Koo. Kinematic instability in the joints of flatfoot subjects during walking: a biplanar fluoroscopic study. <span class="venue">Journal of Biomechanics</span>, 127, 110681.'},
-{y:2020,h:'KH Sung, SS Kwon, et al. Differences in responses to English and Korean versions of the CPCHILD. <span class="venue">Health and Quality of Life Outcomes</span>, 18(1), 1–7.'},
-{y:2020,h:'JJ Min, SS Kwon, et al. Factors affecting subjective symptoms in children with pes planovalgus deformity. <span class="venue">JBJS</span>, 102(17), 1479–1485.'},
-{y:2020,h:'SS Kwon, H Kim, SJ Shin, SY Lee. Optimization of tenocyte lineage-related factors from tonsil-derived mesenchymal stem cells using response surface methodology. <span class="venue">J. Orthopaedic Surgery and Research</span>, 15, 1–9.'},
-{y:2019,e:1,h:'SY Kim, SS Kwon, et al. Cost for treatment and follow-up of thyroid cancer increases according to disease severity. <span class="venue">Head and Neck</span>, 41(7).'},
-{y:2018,e:1,h:'SS Kwon, MH Nam, MS Park, et al. Short-term outcomes and influencing factors after ankle fracture surgery. <span class="venue">J. Foot &amp; Ankle Surgery</span>, 57(6), 1096–1100.'},
-{y:2018,e:1,h:'SH Park, JH Oh, SS Kwon. Graphical evaluation of robust parameter designs based on extended prediction variance. <span class="venue">Communications in Statistics – Theory and Methods</span>.'},
-{y:2017,e:1,h:'SH Park, JH Oh, SS Kwon. Extended scaled prediction variance optimality for modified central composite design. <span class="venue">Communications in Statistics – Theory and Methods</span>, 46(19), 9614–9624.'},
-{y:2016,e:1,h:'SS Kwon, TH Kim, SY Lee, SJ Sin. Is central skeleton bone quality a predictor of the severity of proximal humeral fractures? <span class="venue">Injury</span>, 2777–2782.'},
-{y:2015,e:1,h:'YS Lee, SS Kwon, C O\'Sullivan, et al. Push-recovery stability of biped locomotion. <span class="venue">ACM Transactions on Graphics</span>, 34(6), 180–189.'},
-{y:2015,e:1,h:'SS Kwon, YM Ko, HY Seon, et al. Geographic distribution of urologists in Korea, 2007–2012. <span class="venue">J. Korean Medical Science</span>, 30(11), 1638–1645.'},
+{y:2021,h:'SY Kim, YI Kim, HJ Kim, H Chang, SM Kim, YS Lee, SS Kwon, H Shin, HS Chang, CS Park. New approach of prediction of recurrence in thyroid cancer patients using machine learning. <span class="venue">Medicine</span>, 100(42).'},
+{y:2021,h:'JJ Min, SS Kwon, KT Kim, KH Sung, KM Lee, Y Choi, MS Park. Blood Loss and Related Laboratory Changes after Single-Event Multilevel Surgery and Hip Reconstructive Surgery in Patients with Cerebral Palsy. <span class="venue">Clinics in Orthopedic Surgery</span>, 13(3), 406-414.'},
+{y:2021,h:'JJ Min, SS Kwon, KH Sung, KM Lee, CY Chung, MS Park. Remodelling of femoral head deformity after hip reconstructive surgery in patients with cerebral palsy. <span class="venue">The Bone &amp; Joint Journal</span>, 103(1), 198-203.'},
+{y:2021,h:'SS Kwon, KT Kim, JJ Min, MS Park, KH Sung, KM Lee, Y Choi. Blood Loss and Related Laboratory Changes after Single-Event Multilevel Surgery and Hip Reconstructive Surgery in Patients with Cerebral Palsy. <span class="venue">Clinics in Orthopedic Surgery</span>, 406-414.'},
+{y:2020,h:'KH Sung, SS Kwon, GH Cho, CY Chung, C Encisa, H Menal, U Narayanan, MS Park. Differences in responses to English and Korean versions of the Caregiver Priorities &amp; Child Health Index of Life with Disabilities (CPCHILD). <span class="venue">Health and Quality of Life Outcomes</span>, 18(1), 1-7.'},
+{y:2020,h:'JJ Min, SS Kwon, KH Sung, KM Lee, CY Chung, MS Park. Progression of planovalgus deformity in patients with cerebral palsy. <span class="venue">BMC Musculoskeletal Disorders</span>, 21(1), 1-8.'},
+{y:2020,h:'SS Kwon, H Kim, SJ Shin, SY Lee. Optimization of tenocyte lineage-related factors from tonsil-derived mesenchymal stem cells using response surface methodology. <span class="venue">Journal of Orthopaedic Surgery and Research</span>, 15, 1-9.'},
+{y:2020,h:'JJ Min, SS Kwon, KH Sung, KM Lee, CY Chung, MS Park. Factors Affecting Subjective Symptoms in Children with Pes Planovalgus Deformity: A Study Using the Oxford Ankle Foot Questionnaire. <span class="venue">JBJS</span>, 102(17), 1479-1485.'},
+{y:2020,h:'JJ Min, SS Kwon, KH Sung, KM Lee, CY Chung, MS Park. Factors affecting GDI improvement after single-event multilevel surgery in patients with cerebral palsy. <span class="venue">Gait &amp; Posture</span>, 80, 101-105.'},
+{y:2020,h:'KB Kwon, Y Choi, KH Sung, CY Chung, KM Lee, SS Kwon, GH Cho, MS Park. Correlation between accelerometer and questionnaire-based assessment of physical activity in patients with cerebral palsy. <span class="venue">Clinics in Orthopedic Surgery</span>, 12(1), 107-112.'},
+{y:2020,h:'CY Chung, SS Kwon, MS Park, KM Lee, KH Sung. Surgical outcomes after single-event multilevel surgery in cerebral palsy patients with mid-stance knee hyperextension. <span class="venue">Gait &amp; Posture</span>, 77, 1-5.'},
+{y:2020,h:'KH Sung, SS Kwon, CY Chung, KM Lee, MS Park. Radiographic changes of the mid-tarsal joint after calcaneal lengthening for planovalgus foot deformity. <span class="venue">Foot and Ankle Surgery</span>, 26(1), 110-115.'},
+{y:2019,e:1,h:'SY Kim, SS Kwon, HJ Shin, BW Kim, SM Kim, JS Park, YS Lee, HJ Jang, HS Jang. Cost for treatment and follow-up of thyroid cancer increases according to the severity of disease. <span class="venue">Head &amp; Neck</span>, 41(7), 1-4.'},
+{y:2018,e:1,h:'JH Kim, SS Kwon, JW Park, JH Bae, JS Sim, H Choi. Who are suitable for low-dose tamsulosin monotherapy as initial treatment strategy in male patients with lower urinary tract symptoms? <span class="venue">Medicine</span>, 1-7.'},
+{y:2018,e:1,h:'SS Kwon, MH Nam, MS Park, KH Sung, YH Yoon, KM Lee, SY Lee, JH Jung. Short-Term Outcomes and Influencing Factors After Ankle Fracture Surgery. <span class="venue">Journal of Foot &amp; Ankle Surgery</span>, 57(6), 1096-1100.'},
+{y:2018,e:1,h:'SS Kwon, KH Sung, JY Kim, KM Lee, JY Jung, MS Park. Use of iliac crest allograft for Dega pelvic osteotomy in patients with cerebral palsy. <span class="venue">BMC Musculoskeletal Disorders</span>, 19, 1-9.'},
+{y:2018,e:1,h:'SS Kwon, KH Sung, KM Lee, JY Jung, KH Cho, MS Park. Long-term outcomes over 10 years after femoral derotation osteotomy in ambulatory children with cerebral palsy. <span class="venue">Gait &amp; Posture</span>, 119-125.'},
+{y:2018,e:1,h:'SS Kwon, SJ Moon, KH Sung, SY Lee. Radiographic evaluation of the normal ankle joint in children and adolescents. <span class="venue">Journal of Orthopaedic Science</span>, 1-7.'},
+{y:2018,e:1,h:'SS Kwon, SW Kim, MS Park, KM Lee, SY Lee, JY Jung. Influence of surgery involving tendons around the knee joint on ankle motion during gait in patients with cerebral palsy. <span class="venue">BMC Musculoskeletal Disorders</span>, 1-7.'},
+{y:2018,e:1,h:'SH Park, JH Oh, SS Kwon. Graphical evaluation of robust parameter designs based on extended scaled prediction variance and extended spherical average prediction variance. <span class="venue">Communications in Statistics - Theory and Methods</span>, 1-10.'},
+{y:2017,e:1,h:'SS Kwon, YD Ko, DJ Kim, JH Ahn, YH Yoon, SY Lee. Influence of growth hormone treatment on radiographic indices of the spine: propensity-matched analysis. <span class="venue">Journal of Orthopaedic Surgery and Research</span>, 1-9.'},
+{y:2017,e:1,h:'SH Park, JH Oh, SS Kwon. Extended scaled prediction variance optimality for modified central composite design. <span class="venue">Communications in Statistics - Theory and Methods</span>, 46(19), 9614-9624.'},
+{y:2017,e:1,h:'SS Kwon, SW Kim, JH Bae, DK Shin, TK Yoo, GW Lee, S Cho, H Choi, YH Kim. A multicenter real-life study of the efficiency of an alpha-blocker with or without an anticholinergic agent (imidafenacin) in patients with lower urinary tract symptoms/benign prostatic hyperplasia and storage symptoms. <span class="venue">International Journal of Clinical Practice</span>, 71(5), 1-8.'},
+{y:2017,e:1,h:'SS Kwon, SJ Moon, JY Kim, MS Park, KH Sung, KM Lee, KW Lee, JW Lee, MK Jung, JY Jung, BC Cho. Incidence and risk factors of hardware-related complications after proximal femoral osteotomy in children and adolescents. <span class="venue">Journal of Pediatric Orthopaedics B</span>, 1-10.'},
+{y:2017,e:1,h:'BC Cho, SS Kwon, JY Kim, SY Moon, KH Sung, KM Lee, IH Lee, HW Lim, JY Kim, MS Park. Undercorrection of planovalgus deformity after calcaneal lengthening in patients with cerebral palsy. <span class="venue">Journal of Pediatric Orthopaedics B</span>, 1-10.'},
+{y:2016,e:1,h:'SS Kwon, TH Kim, SY Lee, SJ Sin. Is central skeleton bone quality a predictor of the severity of proximal humeral fractures? <span class="venue">Injury</span>, 2777-2782.'},
+{y:2016,e:1,h:'SS Kwon, JY Kim, SJ Moon, KH Sung, KM Lee, KJ Jung, MK Jung, JY Jung, BC Cho, MS Park. Association of gross motor function classification system level and school attendance with bone mineral density in patients with cerebral palsy. <span class="venue">Journal of Clinical Densitometry</span>, 1-6.'},
+{y:2016,e:1,h:'SS Kwon, KB Kim, MK Chung, MS Park, S Koo, SY Lee, KM Lee. Is there a relationship between bone morphology and injured ligament on imaging studies and laxity on ankle stress radiographs? <span class="venue">International Journal of Sports Medicine</span>, 1080-1086.'},
+{y:2016,e:1,h:'KH Sung, SS Kwon, MS Park, KM Lee, KW Lee, KS Lee, YJ Jung, JY Jung, HM Cha. Performance of a protector against scattered radiation during intraoperative use of a C-arm fluoroscope. <span class="venue">Journal of Radiological Protection</span>, 629-640.'},
+{y:2016,e:1,h:'JY Park, SS Kwon, SY Moon, MS Park, KH Sung, KM Lee, JY Jung, BC Cho, Y Choi. Progression of hip displacement during radiographic surveillance in patients with cerebral palsy. <span class="venue">Journal of Korean Medical Science</span>, 1143-1149.'},
+{y:2016,e:1,h:'SS Kwon, A Zulkarnain, YS Kim, SY Moon, KH Sung, KM Lee, MK Jung, JY Jung, BC Cho, MS Park. Osteopenic features of the hip joint in patients with cerebral palsy: a hospital-based study. <span class="venue">Developmental Medicine and Child Neurology</span>, 1-6.'},
+{y:2016,e:1,h:'SY Lee, SS Kwon, MS Park, KH Sung, HS Jung, KM Lee. Influence of ankle fracture surgery on glycemic control in patients with diabetes. <span class="venue">BMC Musculoskeletal Disorders</span>, 1-6.'},
+{y:2016,e:1,h:'SH Won, SS Kwon, SY Moon, MS Park, KM Lee, IH Lee, KJ Jung, MK Jung, JY Jung. Stepwise surgical approach to equinocavovarus in patients with cerebral palsy. <span class="venue">Journal of Pediatric Orthopaedics</span>, 112-118.'},
+{y:2016,e:1,h:'YA Song, SS Kwon, JH Kim, SH Doo, YS Song, WJ Yang. Is there any relation between the degree of fatty liver disease and severity of lower urinary tract symptoms? <span class="venue">Urology</span>, 90-95.'},
+{y:2016,e:1,h:'SS Kwon, BK Kim, TK Kim, SY Moon, MS Park, C Yoon, TS Lee, KJ Jung, KM Lee. Factors affecting length of hospital stay and mortality in infected diabetic foot ulcers undergoing surgical drainage without major amputation. <span class="venue">Journal of Korean Medical Science</span>, 120-124.'},
+{y:2015,e:1,h:'SS Kwon, YM Ko, HY Seon, SH Song, YS Song, SL Sim, IS Jung, JH Kim. Geographic Distribution of Urologists in Korea, 2007 to 2012. <span class="venue">Journal of Korean Medical Science</span>, 30(11), 1638-1645.'},
+{y:2015,e:1,h:'YS Lee, SS Kwon, C O\'Sullivan, MS Park, KH Lee, JH Lee, JW Jung. Push-Recovery Stability of Biped Locomotion. <span class="venue">ACM Transactions on Graphics</span>, 34(6), 180-189.'},
+{y:2015,e:1,h:'KM Lee, SS Kwon, TK Kim, SY Lee, JY Jung, Y Choi, MS Park. Gender- and body-site-specific factors associated with bone mineral density in a non-institutionalized Korean population aged >=50 years. <span class="venue">Journal of Bone and Mineral Metabolism</span>, 33(4), 401-409.'},
+{y:2015,e:1,h:'IH Lee, SS Kwon, SY Moon, KM Lee, KJ Jung, MK Jung, JY Jung, MS Park. Incidence and Risk Factors of Allograft Bone Failure After Calcaneal Lengthening. <span class="venue">Clinical Orthopaedics and Related Research</span>, 473(5), 1765-1774.'},
+{y:2015,e:1,h:'HM Son, SY Lee, SS Kwon, SH Doo, KH Sung, KM Lee, SH Lee, JY Jung, MS Park. Perioperative complications of orthopedic surgery for lower extremity in patients with cerebral palsy. <span class="venue">Journal of Korean Medical Science</span>, 30(4), 489-494.'},
+{y:2015,e:1,h:'JH Kim, SL Sim, SS Kwon, HJ Kim, JH Bae, WJ Lee, BC Cheon, H Choi. Association between self-perception period of lower urinary tract symptoms and International Prostate Symptom Score: a propensity score matching study. <span class="venue">BMC Urology</span>, 15(30), 1-7.'},
+{y:2015,e:1,h:'SY Lee, SS Kwon, BC Min, JH Kim, JY Kim, HS Kim, SJ Moon, JH Yoo, KH Sung. Reliability and validity of lower extremity computed tomography as a screening tool for osteoporosis. <span class="venue">Osteoporosis International</span>, 26(4), 1387-1394.'},
+{y:2015,e:1,h:'JH Kim, SS Kwon, SH Doo, YS Song, KS Cho, SS Hong, JY Hwang, WJ Yang. Which anthropometric measurements including visceral fat, subcutaneous fat, body mass index, and waist circumference could predict the urinary stone composition most? <span class="venue">BMC Urology</span>, 15(17), 1-8.'},
+{y:2015,e:1,h:'KH Sung, SS Kwon, YS Ban, KM Lee, SY Lee, JY Jung, MS Park. What are the risk factors associated with urinary retention after orthopaedic surgery? <span class="venue">BioMed Research International</span>, 2015, 613216, 1-5.'},
+{y:2015,e:1,h:'SE Song, SS Kwon, CH Kim, BY Seo, KS Son, OH Woo, KL Cho, SB Cho. Computer-aided detection (CAD) system for breast MRI in assessment of local tumor extent, nodal status, and multifocality of invasive breast cancers: preliminary study. <span class="venue">Cancer Imaging</span>, 15(1), 1-10.'},
+{y:2015,e:1,h:'KM Lee, SS Kwon, TK Kim, SY Moon, MS Park, JW Park, IH Lee, KJ Jung, JY Jung. Bone mineral density is not associated with musculoskeletal pain in postmenopausal Korean women aged >=50 years. <span class="venue">Clinical Rheumatology</span>, 34(2), 337-343.'},
+{y:2015,e:1,h:'JH Oh, SS Kwon, SW Kim, JL Oh, K Huh. The change of macular thickness following single-session pattern scan laser panretinal photocoagulation for diabetic retinopathy. <span class="venue">Graefe\'s Archive for Clinical and Experimental Ophthalmology</span>, 253(1), 57-63.'},
+{y:2015,e:1,h:'SY Lee, SS Kwon, MS Park, KM Lee, JY Jung, KJ Cho. Annual changes in radiographic indices of the spine in cerebral palsy patients. <span class="venue">European Spine Journal</span>, 1-8.'},
+];
+
+const books=[
+  {title:'박성현, 오진호, 권순선. 데이터사이언스의 매력: 데이터·AI 경제 시대의 미래경쟁력 (제2판)', meta:'자유아카데미, 2023.'},
+  {title:'박성현, 오진호, 권순선. 통계로 풀어가는 빅데이터', meta:'한국표준협회미디어, 2016.'},
+];
+
+const patents=[
+  {
+    ko:'권순선, 표성인. 효율적 데이터 처리를 위한 텍스트 데이터의 차원 축소 방법 및 장치 (등록)',
+    en:'SS Kwon, SI Pyo. Method and Device for Dimension Reduction of Textual Data for Efficient Data Processing (Registered)',
+    no:'등록번호 10-2951804 · 2026.04',
+    doi:'https://doi.org/10.8080/1020230113951'
+  },
 ];
 
 const list=document.getElementById('publist');
 let filter='all', showEarly=false;
-function render(){
+
+function renderPapers(){
   list.innerHTML=pubs.filter(p=>{
     if(!showEarly && p.e) return false;
     if(filter!=='all' && String(p.y)!==filter) return false;
     return true;
   }).map(p=>`<div class="pub"><div class="yr">${p.y}</div><div class="body">${p.h}</div></div>`).join('')
-  || '<div class="pub"><div class="yr"></div><div class="body" style="color:var(--muted)">—</div></div>';
+  || '<div class="pub"><div class="yr"></div><div class="body" style="color:var(--muted)">-</div></div>';
 }
+function renderBooks(){
+  document.getElementById('booklist').innerHTML = books.map(b=>
+    `<div class="book"><div class="b-title">${b.title}</div><div class="b-meta">${b.meta}</div></div>`
+  ).join('');
+}
+function renderPatents(){
+  document.getElementById('patentlist').innerHTML = patents.map(p=>
+    `<div class="patent">
+       <div data-en="${p.en.replace(/"/g,'&quot;')}" data-ko="${p.ko.replace(/"/g,'&quot;')}">${p.ko}</div>
+       <div class="pt-en only-ko">${p.en}</div>
+       <div class="pt-no">${p.no}</div>
+       <div class="pt-no"><a href="${p.doi}" target="_blank" rel="noopener">${p.doi}</a></div>
+     </div>`
+  ).join('');
+}
+
+function show(which){
+  const papers = which==='papers';
+  document.getElementById('publist').style.display   = papers ? '' : 'none';
+  document.getElementById('morewrap').style.display  = (papers && filter==='all') ? '' : 'none';
+  document.getElementById('scholarnote').style.display = papers ? '' : 'none';
+  document.getElementById('booklist').style.display   = which==='books' ? '' : 'none';
+  document.getElementById('patentlist').style.display = which==='patents' ? '' : 'none';
+}
+
+function apply(){
+  if(filter==='books'){ renderBooks(); show('books'); }
+  else if(filter==='patents'){ renderPatents(); show('patents'); }
+  else { renderPapers(); show('papers'); }
+  if(window.setLang){ try{ window.setLang(localStorage.getItem('starlab-lang')||'en'); }catch(e){} }
+}
+
 document.getElementById('filters').addEventListener('click',e=>{
-  if(!e.target.classList.contains('fbtn'))return;
-  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
-  e.target.classList.add('active');
-  filter=e.target.dataset.y; render();
+  const b=e.target.closest('.fbtn'); if(!b)return;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  filter=b.dataset.y; apply();
 });
 document.getElementById('showall').addEventListener('click',e=>{
   showEarly=!showEarly;
   const b=e.target;
-  b.setAttribute('data-en', showEarly?'Hide earlier work':'Show earlier work (2015–2019)');
-  b.setAttribute('data-ko', showEarly?'이전 논문 접기':'이전 논문 보기 (2015–2019)');
-  b.textContent = (localStorage.getItem('starlab-lang')==='ko')
-    ? b.getAttribute('data-ko') : b.getAttribute('data-en');
-  render();
+  b.setAttribute('data-en', showEarly?'Hide earlier work':'Show earlier work (2015-2019)');
+  b.setAttribute('data-ko', showEarly?'이전 논문 접기':'이전 논문 보기 (2015-2019)');
+  b.textContent = (localStorage.getItem('starlab-lang')==='ko') ? b.getAttribute('data-ko') : b.getAttribute('data-en');
+  renderPapers();
 });
-render();
+apply();
 </script>
 </body>
 </html>

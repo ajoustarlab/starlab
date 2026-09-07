@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentations — STAR Lab, Ajou University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- ===== COMMON NAV (same on every page) ===== -->
+<nav>
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>STAR&nbsp;Lab</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="toggleMenu()">≡</button>
+    <div class="nav-right">
+      <div class="nav-links" id="nl">
+        <a href="index.html" data-en="Home" data-ko="홈">Home</a>
+        <a href="people.html" data-en="People" data-ko="구성원">People</a>
+        <a href="projects.html" data-en="Projects" data-ko="연구과제">Projects</a>
+        <a href="publications.html" data-en="Publications" data-ko="논문">Publications</a>
+        <a href="presentations.html" class="active" data-en="Presentations" data-ko="학회발표">Presentations</a>
+        <a href="teaching.html" data-en="Teaching" data-ko="강의">Teaching</a>
+        <a href="gallery.html" data-en="Gallery" data-ko="갤러리">Gallery</a>
+        <a href="contact.html" data-en="Contact" data-ko="연락처">Contact</a>
+      </div>
+      <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="ko">KO</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ===== /COMMON NAV ===== -->
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">// <span data-en="Presentations" data-ko="학회발표">Presentations</span></div>
+    <h1 data-en="Conference presentations" data-ko="학회 발표">Conference presentations</h1>
+    <p data-en="Talks and posters at domestic and international conferences."
+       data-ko="국내외 학회에서의 구두·포스터 발표.">Talks and posters at domestic and international conferences.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="filters" id="filters">
+      <button class="fbtn active" data-y="all" data-en="All" data-ko="전체">All</button>
+      <button class="fbtn" data-y="2026">2026</button>
+      <button class="fbtn" data-y="2025">2025</button>
+      <button class="fbtn" data-y="2024">2024</button>
+      <button class="fbtn" data-y="2023">2023</button>
+      <button class="fbtn" data-y="intl" data-en="International" data-ko="국제">International</button>
+    </div>
+    <div id="preslist"></div>
+    <div class="pub-more"><button id="showall" data-en="Show earlier (2015–2022)" data-ko="이전 발표 보기 (2015–2022)">Show earlier (2015–2022)</button></div>
+  </div>
+</section>
+
+<!-- ===== COMMON FOOTER ===== -->
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 STAR Lab — STatistical Analysis Research Lab, Ajou University</div>
+    <div><a href="https://scholar.google.co.kr/citations?user=JSOv5boAAAAJ">Google Scholar</a></div>
+  </div>
+</footer>
+<!-- ===== /COMMON FOOTER ===== -->
+
+<script src="assets/site.js"></script>
+<script>
+/* ============================================================
+   PRESENTATION DATA — one line per talk.
+     y   : year (number)
+     h   : HTML text (authors, title, venue)
+     intl: true  -> tagged as International (also matches the "International" filter)
+     e   : 1      -> "earlier work", hidden until the toggle is clicked (2015–2022)
+   Korean author names are romanized to match the English style (e.g. SS Kwon).
+   Venue = official conference name where available.
+   ============================================================ */
+const pres=[
+// ---------- 2026 ----------
+{y:2026,h:'DW Jeong, DH Min, SS Kwon. SlotActivationHead: A Lightweight Abstention Mechanism for Hallucination Suppression in Slot Filling. <span class="venue">The Korean Statistical Society Summer Conference 2026</span>.'},
+{y:2026,h:'DH Min, SS Kwon. Sign-constrained Bayesian Lasso for Land-use Regression with Uncertainty Quantification. <span class="venue">The Korean Statistical Society Summer Conference 2026</span>.'},
+
+// ---------- 2025 ----------
+{y:2025,h:'SI Pyo, SS Kwon. A Jensen–Shannon Divergence Approach to Intersectional Topic Modeling. <span class="venue">The Korean Statistical Society Summer Conference 2025</span>.'},
+{y:2025,h:'S Jang, SS Kwon. A Systematic Review and Meta-analysis of Self-controlled Case Series Studies on Vaccine-associated Stroke. <span class="venue">The Korean Statistical Society Summer Conference 2025</span>.'},
+{y:2025,h:'DH Lee, SS Kwon. Fairness-aware Score Adjustment via Group-based Rating Behavior in Recommendation Systems. <span class="venue">The Korean Statistical Society Summer Conference 2025</span>.'},
+{y:2025,h:'SI Pyo, SS Kwon. Intersection Detection in Latent Topic Modeling. <span class="venue">Future Mathematics for Industry (FMfI) 2025</span>.'},
+{y:2025,h:'S Jang, SS Kwon. Meta-analysis of Self-controlled Case Series Studies on Vaccine-associated Stroke. <span class="venue">Future Mathematics for Industry (FMfI) 2025</span>.'},
+{y:2025,h:'DH Lee, SS Kwon. Fairness-aware Score Adjustment. <span class="venue">Future Mathematics for Industry (FMfI) 2025</span>.'},
+{y:2025,intl:true,h:'SS Kwon. Sparse clustering for multi-dimensional functional data using Fréchet distance: Methods and applications in medical data. <span class="venue">The 8th International Conference on Econometrics and Statistics (EcoSta 2025)</span>, Tokyo, Japan.'},
+{y:2025,h:'S Jang, SS Kwon. Stroke Risk and BNT162b2: A Systematic Review and Meta-Analysis. <span class="venue">2025 Next-Generation Women Mathematical Scientists Career Leaders Forum</span>.'},
+
+// ---------- 2024 ----------
+{y:2024,intl:true,h:'SI Pyo, S Jang, ST Kim, SS Kwon. Non-Negative Constrained Linear Model based on Elemental Carbon Emission. <span class="venue">KSIAM 2024 Annual Meeting</span>.'},
+{y:2024,h:'JH Ryu, DH Lee, ST Kim, SS Kwon. Correlation-Aware NNLS-Based Model for Estimating EC Emission Coefficients of Overseas and Domestic Regions. <span class="venue">The Korean Statistical Society Conference 2024</span>.'},
+{y:2024,intl:true,h:'SS Kwon. Clustering for multi-dimensional functional data in clinical research. <span class="venue">International Data Science Workshop and Data Science Symposium (IDWSDS) 2024</span>.'},
+{y:2024,h:'SS Kwon, I Kang, YJ Yoon, J Park, HS Choi, C Park. Cluster Analysis based on Fréchet Distance for Multi-dimensional Functional Data. <span class="venue">The Korean Statistical Society Conference 2024</span>.'},
+
+// ---------- 2023 ----------
+{y:2023,h:'SS Kwon. Improvement of land use regression method as sign-constrained regularized regressions. <span class="venue">Korean Society for Industrial and Applied Mathematics (KSIAM)</span>.'},
+{y:2023,h:'SS Kwon. Cluster analysis for multi-dimensional functional data. <span class="venue">Korean Society for Industrial and Applied Mathematics (KSIAM)</span>.'},
+{y:2023,h:'SS Kwon, HS Choi, HH Lee, YJ Kim, HC Kim, WJ Lee. Land Use Regression Method as Sign-Constrained Regularized Regressions. <span class="venue">Korean Data Analysis Society (KDAS)</span>.'},
+{y:2023,h:'JH Lee, SS Kwon. Improvement of Recommendation System for Adaptive Learning. <span class="venue">The Korean Statistical Society</span>.'},
+{y:2023,h:'SI Pyo, SW Seo, SS Kwon. Text Visualization Algorithm based on False Discovery Rate Control Test. <span class="venue">The Korean Statistical Society</span>.'},
+{y:2023,intl:true,h:'SS Kwon. Interpretable Classification for Multivariate Gait Analysis. <span class="venue">The 10th International Congress on Industrial and Applied Mathematics (ICIAM 2023)</span>, Tokyo, Japan.'},
+
+// ---------- earlier (hidden by default) ----------
+{y:2022,e:1,h:'SS Kwon, SI Pyo. Improvement of the KTDA Algorithm for the Visualization of Semantic Networks. <span class="venue">Korean Data Mining Society</span>.'},
+{y:2022,e:1,h:'SH Ahn, SS Kwon, SE Kim, SH Kim, JH Lee. Application of e-learning data to derive optimal learning strategies. <span class="venue">Korean Data Mining Society</span>.'},
+{y:2021,e:1,h:'SS Kwon, GG Kim. Implementation of the KTDA (Korean Text Data Analysis) function. <span class="venue">Korean Data Mining Society</span>.'},
+{y:2021,e:1,h:'HJ Hwang, SS Kwon, HS Choi. Ordinal classification for functional data using data augmentation and a large-scale pretrained model. <span class="venue">Korean Data Mining Society</span>.'},
+{y:2021,e:1,h:'SS Kwon. Statistical modeling in medical research — data-driven digital healthcare. <span class="venue">2021 Ajou Bio-Health Science Research Fair</span>.'},
+{y:2020,e:1,h:'SB Heo, SS Kwon. K-means longitudinal clustering based on multi-dimensional Fréchet distance. <span class="venue">Korean Data Mining Society</span>.'},
+{y:2020,e:1,h:'SS Kwon. Statistical Learning in Medical Data. <span class="venue">2020 Ajou Bio-Health Science Research Fair</span>.'},
+{y:2019,e:1,intl:true,h:'SS Kwon. kmlShape method to cluster longitudinal data. <span class="venue">The 12th International Conference of the ERCIM WG on Computational and Methodological Statistics (CMStatistics 2019)</span>, London, UK.'},
+{y:2019,e:1,intl:true,h:'SS Kwon. Applications of Statistical Models in Medical Research. <span class="venue">2019 International Joint Conference on AI &amp; Data Science: Mathematics and Applications</span>.'},
+{y:2019,e:1,intl:true,h:'SB Heo, SS Kwon, HS Jang. Prediction model for thyroidectomy cancer patients with risk of recurrence based on a longitudinal data clustering method. <span class="venue">2019 International Joint Conference on AI &amp; Data Science: Mathematics and Applications</span>.'},
+{y:2019,e:1,intl:true,h:'SY Lee, SS Kwon, KM Lee. Changes in the mechanical axis and weight-bearing line of the ankle after varus knee correction. <span class="venue">AOFAS Annual Meeting 2019</span>.'},
+{y:2018,e:1,intl:true,h:'SS Kwon. Statistical Models for Longitudinal Data Analysis in Medical Research. <span class="venue">Ajou–Kyushu Joint Workshop on Industrial Mathematics</span>.'},
+{y:2018,e:1,intl:true,h:'SY Lee, SS Kwon, MS Park, KM Lee. Natural Progression of Radiographic Indices in Juvenile Hallux Valgus Deformity. <span class="venue">American Orthopaedic Foot &amp; Ankle Society (AOFAS)</span>.'},
+{y:2018,e:1,h:'SY Lee, SS Kwon. Changes in the mechanical axis and weight-bearing line of the ankle after varus knee correction. <span class="venue">Korean Foot and Ankle Society, Autumn Meeting</span>.'},
+{y:2018,e:1,h:'HY Ryu, SS Kwon, G Cho, BH Lee. Demand forecasting for supply chain management using big data. <span class="venue">The Korean Statistical Society</span>.'},
+{y:2018,e:1,h:'SS Kwon. Profiling of Korean thyroid cancer patients and development of a prognostic prediction model based on generalized mixture models. <span class="venue">Conference on Math to Industry</span>.'},
+{y:2018,e:1,h:'SS Kwon. Applications of Statistical Models in Clinical Research. <span class="venue">Korean Business Intelligence &amp; Data Mining Society, Spring Conference</span>.'},
+{y:2017,e:1,intl:true,h:'SS Kwon, KM Kim, H Kim. Optimization of Tenocyte Lineage-Related Factors from Tonsil-Derived Mesenchymal Stem Cells using Design of Experiments. <span class="venue">6th Triennial IFFAS Scientific Meeting</span>.'},
+{y:2017,e:1,intl:true,h:'H Kim, SS Kwon, SJ Shin, SY Lee. Tenogenic differentiation of tonsil- and bone-marrow-derived mesenchymal stem cells. <span class="venue">6th Triennial IFFAS Scientific Meeting</span>.'},
+{y:2016,e:1,intl:true,h:'SS Kwon. Extended scaled prediction variance optimality for robust parameter design. <span class="venue">Conference on Experimental Design and Analysis</span>.'},
+{y:2015,e:1,intl:true,h:'KW Lee, SS Kwon, KJ Kim, JS Ryu, SY Moon, MS Park, KM Lee, MK Jung, JY Jung, BC Cho. Progression of hip instability during radiographic surveillance in patients with cerebral palsy. <span class="venue">69th Annual Meeting, American Academy for Cerebral Palsy and Developmental Medicine (AACPDM)</span>.'},
+{y:2015,e:1,h:'SY Lee, SS Kwon, KH Sung, KM Lee, HS Jung. Short-term outcomes and influencing factors after ankle fracture surgery. <span class="venue">Korean Foot and Ankle Society, Autumn Meeting</span>.'},
+{y:2015,e:1,h:'SS Kwon, MS Park, SY Lee. Performance of intraclass correlation coefficients for bilateral cases in medical research. <span class="venue">The Korean Statistical Society, Autumn Conference</span>.'},
+{y:2015,e:1,h:'SY Lee, SS Kwon, KH Sung, JH Jung, HS Jung. Short-term outcomes and influencing factors after ankle fracture surgery. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'KM Lee, SS Kwon, TW Kim, MS Park, KW Lee, MK Jung, JY Jung, BC Cho. Posterior tibial tendon continuity can be screened on plain anteroposterior foot radiographs: a report of three cases. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'KM Lee, SS Kwon, SB Koo, MS Park, KW Lee, MK Jung, JY Jung, BC Cho. Sex differences in pedobarographic findings and the relationship between radiograph and pedobarograph measurements in young healthy adults. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'SH Lee, SS Kwon, MS Park, KM Lee, SY Lee, JY Jung. Reliability and Validity of the Duncan-Ely Test for Assessing Rectus Femoris Spasticity in Patients with Cerebral Palsy. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'SY Moon, SS Kwon, MS Park, KM Lee, MK Jung, JY Jung, BC Cho. Osteoporotic features of the hip joint in patients with cerebral palsy. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'DK Kwon, SS Kwon, MS Park, KW Lee, MK Jung, JY Jung, BC Cho. A comparison between blade plate and locking compression plate in proximal femoral osteotomy — hardware-related complications. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'TG Kim, SS Kwon, MS Park, KM Lee, KW Lee, MK Jung, JY Jung, BC Cho. Risk factors for osteoarthritis and contributing factors to current arthritic pain in South Korean older adults. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'SH Won, SS Kwon, SY Moon, MS Park, KM Lee, KW Lee, MK Jung, JY Jung, BC Cho. Validation of common questionnaires assessing physical activity using accelerometers in patients with cerebral palsy. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'KM Lee, SS Kwon, MS Park, KW Lee, MK Jung, JY Jung, BC Cho. Influence of anatomical predisposition and injured ligament of the ankle on ankle stress radiographs. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+{y:2015,e:1,h:'KJ Jung, SS Kwon, MS Park, KM Lee, KW Lee, MK Jung, JY Jung, BC Cho. Association of GMFCS Level and School Attendance with Bone Mineral Density in Patients with Cerebral Palsy. <span class="venue">59th Congress of the Korean Orthopaedic Association</span>.'},
+];
+
+const list=document.getElementById('preslist');
+let filter='all', showEarly=false;
+function render(){
+  list.innerHTML=pres.filter(p=>{
+    if(!showEarly && p.e) return false;
+    if(filter==='intl') return !!p.intl;
+    if(filter!=='all' && String(p.y)!==filter) return false;
+    return true;
+  }).map(p=>{
+    const tag = p.intl ? '<span class="intl" data-en="INTL" data-ko="국제">INTL</span>' : '';
+    return `<div class="pres"><div class="yr">${p.y}</div><div class="body">${p.h}${tag}</div></div>`;
+  }).join('')
+  || '<div class="pres"><div class="yr"></div><div class="body" style="color:var(--muted)">—</div></div>';
+  if(window.setLang){ try{ window.setLang(localStorage.getItem('starlab-lang')||'en'); }catch(e){} }
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('.fbtn'); if(!b)return;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  filter=b.dataset.y;
+  if(filter==='intl' || (filter!=='all' && Number(filter)<=2022)) showEarly=true;
+  render();
+});
+document.getElementById('showall').addEventListener('click',e=>{
+  showEarly=!showEarly;
+  const b=e.target;
+  b.setAttribute('data-en', showEarly?'Hide earlier':'Show earlier (2015–2022)');
+  b.setAttribute('data-ko', showEarly?'이전 발표 접기':'이전 발표 보기 (2015–2022)');
+  b.textContent = (localStorage.getItem('starlab-lang')==='ko') ? b.getAttribute('data-ko') : b.getAttribute('data-en');
+  render();
+});
+render();
+</script>
+</body>
+</html>

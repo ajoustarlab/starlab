@@ -42,8 +42,8 @@ nav{
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
 .brand{display:flex;align-items:baseline;gap:10px;font-family:var(--font-head);font-size:22px;font-weight:600;letter-spacing:-.02em;flex:none}
 .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;transform:translateY(-2px)}
-.nav-right{display:flex;align-items:center;gap:26px}
-.nav-links{display:flex;gap:28px;font-size:15px;font-weight:500}
+.nav-right{display:flex;align-items:center;gap:22px}
+.nav-links{display:flex;gap:22px;font-size:14.5px;font-weight:500}
 .nav-links a{color:var(--ink-soft);transition:color .18s;white-space:nowrap}
 .nav-links a:hover{color:var(--accent)}
 .nav-links a.active{color:var(--accent-deep)}
@@ -154,6 +154,42 @@ section{padding:88px 0}
 .tlist div:first-child{border-top:none}
 .tlist .tsub{color:var(--muted);font-size:14px;font-family:var(--font-mono);margin-top:3px}
 
+/* ---------- TEACHING (term list) ---------- */
+.term{padding:22px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:start}
+.term:first-of-type{border-top:none}
+.term-h{font-family:var(--font-mono);font-size:15px;font-weight:500;color:var(--accent-deep);letter-spacing:.02em;padding-top:2px}
+.course-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.course-list li{font-size:16px;color:var(--ink);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.grad{font-family:var(--font-mono);font-size:11px;color:var(--accent-deep);border:1px solid var(--line);background:#fff;padding:2px 8px;border-radius:2px;letter-spacing:.02em}
+
+/* ---------- PROJECTS ---------- */
+.proj{display:grid;grid-template-columns:1fr auto;gap:16px 28px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
+.proj:first-of-type{border-top:none}
+.proj .p-title{font-size:16.5px;color:var(--ink);line-height:1.5}
+.proj .p-meta{font-size:14px;color:var(--ink-soft);margin-top:6px}
+.proj .p-role{font-family:var(--font-mono);font-size:12px;padding:4px 11px;border-radius:2px;white-space:nowrap;align-self:start}
+.role-pi{background:var(--ink);color:#fff}
+.role-co{background:#fff;color:var(--accent-deep);border:1px solid var(--line)}
+.role-part{background:var(--paper-dim);color:var(--ink-soft);border:1px solid var(--line)}
+
+/* ---------- PRESENTATIONS ---------- */
+.pres{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)}
+.pres .yr{font-family:var(--font-mono);font-size:14px;color:var(--accent-deep);padding-top:2px}
+.pres .body{font-size:15.5px;line-height:1.6}
+.pres .venue{color:var(--ink-soft);font-style:italic}
+.pres .intl{display:inline-block;font-family:var(--font-mono);font-size:10.5px;color:var(--accent-deep);border:1px solid var(--line);border-radius:2px;padding:1px 6px;margin-left:6px;vertical-align:middle;letter-spacing:.02em}
+
+/* ---------- BOOKS / PATENTS ---------- */
+.book{display:grid;grid-template-columns:1fr;gap:4px;padding:18px 0;border-top:1px solid var(--line)}
+.book:first-of-type{border-top:none}
+.book .b-title{font-size:16.5px;color:var(--ink)}
+.book .b-meta{font-size:14px;color:var(--ink-soft)}
+.patent{padding:20px 0;border-top:1px solid var(--line);font-size:15.5px;line-height:1.6}
+.patent:first-of-type{border-top:none}
+.patent .pt-en{color:var(--ink-soft);font-size:14.5px}
+.patent .pt-no{font-family:var(--font-mono);font-size:13px;color:var(--accent-deep);margin-top:6px}
+.patent a{color:var(--ink);border-bottom:1px solid var(--accent);word-break:break-all}
+
 /* ---------- GALLERY ---------- */
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gcard{position:relative;overflow:hidden;border-radius:3px;border:1px solid var(--line);background:var(--paper-dim);cursor:pointer}
@@ -203,10 +239,16 @@ footer a{color:#7FBFC8}
   .alumni-list{columns:1}
   section{padding:64px 0}
 }
+@media(max-width:640px){
+  .term{grid-template-columns:1fr;gap:10px}
+  .term-h{padding-top:0}
+  .proj{grid-template-columns:1fr;gap:8px}
+  .proj .p-role{justify-self:start}
+}
 @media(max-width:520px){
   .wrap{padding:0 22px}
   .people-grid{grid-template-columns:repeat(2,1fr);gap:16px}
-  .pub{grid-template-columns:1fr;gap:6px}
+  .pub,.pres{grid-template-columns:1fr;gap:6px}
   .contact-box{padding:30px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto};.gcard img{transition:none}}
