@@ -109,7 +109,7 @@ section{padding:88px 0}
 
 /* ---------- PI CARD ---------- */
 .pi{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:start}
-.pi .photo{width:220px;height:3200px;object-fit:cover;border-radius:3px;background:var(--paper-dim);border:1px solid var(--line)}
+.pi .photo{width:220px;height:320px;object-fit:cover;border-radius:3px;background:var(--paper-dim);border:1px solid var(--line)}
 .pi h3{font-size:26px}
 .pi .role{color:var(--accent-deep);font-weight:500;font-size:15px;margin-top:6px}
 .pi .meta{color:var(--ink-soft);font-size:15px;margin-top:12px;line-height:1.7}
