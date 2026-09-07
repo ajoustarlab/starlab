@@ -51,7 +51,7 @@
 
     <!-- PI -->
     <div class="pi">
-      <!-- To add a photo: upload images/people/soonsun-kwon.jpg to the repo. -->
+      <!-- To add a photo: upload images/people/soonsun-kwon.png to the repo. -->
       <img class="photo" src="images/people/soonsun-kwon.png" alt="Soon-Sun Kwon"
            onerror="this.outerHTML='<div class=&quot;photo ph-fallback&quot; style=&quot;display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:44px;color:var(--accent-deep)&quot;>K</div>'">
       <div>
@@ -70,23 +70,23 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.9V17h2V9L12 3zM5 13.2v3.5c0 1.7 3.1 3.3 7 3.3s7-1.6 7-3.3v-3.5l-7 3.8-7-3.8z"/></svg>Google Scholar</a>
           <a class="plink" href="https://orcid.org/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zM7.4 18H5.6V7.9h1.8V18zM6.5 6.6a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm12 11.4h-1.8v-4.9c0-1.3-.5-2.2-1.6-2.2-.9 0-1.4.6-1.6 1.2-.1.2-.1.5-.1.8V18H9.9s.1-8.3 0-9.1h1.8v1.3c.2-.4 1-1 2.2-1 1.6 0 2.9 1.1 2.9 3.4V18z"/></svg>ORCID</a>
-          <a class="plink" href="https://arxiv.org/a/kwon_s" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 4h18v2H3V4zm0 5h12v2H3V9zm0 5h18v2H3v-2zm0 5h12v2H3v-2z"/></svg>arXiv</a>
+          <a class="plink" href="https://math.ajou.ac.kr/math/people/faculty.do?mode=view&empl_no=$cms$EwBgjArGIMwBwHYg&mngt_no=$cms$EwBgjArGIg7LQ&uniCd=h&deptCd=$cms$CIZQDAzGlgTAjEA&cate=2" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v2h20V7L12 2zM4 10v8H3v2h18v-2h-1v-8h-2v8h-3v-8h-2v8h-2v-8H9v8H6v-8H4z"/></svg><span data-en="Ajou Faculty" data-ko="아주대 교수 소개">Ajou Faculty</span></a>
         </div>
       </div>
     </div>
 
     <!-- PH.D. STUDENTS -->
     <div class="grp-label"><span data-en="Ph.D. Students" data-ko="박사과정">Ph.D. Students</span></div>
-    <div class="people-grid" id="phd"></div>
+    <div class="people-rows" id="phd"></div>
 
     <!-- M.S. STUDENTS -->
     <div class="grp-label"><span data-en="M.S. Students" data-ko="석사과정">M.S. Students</span></div>
-    <div class="people-grid" id="ms"></div>
+    <div class="people-rows" id="ms"></div>
 
     <!-- UNDERGRAD -->
     <div class="grp-label"><span data-en="Undergraduate Students" data-ko="학부 연구생">Undergraduate Students</span></div>
-    <div class="people-grid" id="ug"></div>
+    <div class="people-rows" id="ug"></div>
 
     <!-- ALUMNI -->
     <div class="grp-label"><span data-en="Alumni" data-ko="졸업생">Alumni</span></div>
@@ -118,17 +118,17 @@
               If the file doesn't exist, a circle with the initial shows instead.
    ============================================================ */
 const phd = [
-  {name:'Jihyun Park',   nameKo:'박지현', af:'Mathematics', afKo:'수학과', email:'jhn1105@gmail.com', photo:'jihyun-park.jpg'},
-  {name:'Sung-Inn Pyo',  nameKo:'표성인', af:'Data Science, Mathematics', afKo:'데이터사이언스·수학과', email:'luinn27@ajou.ac.kr', photo:'sunginn-pyo.jpg'},
-  {name:'Seol Jang',     nameKo:'장설',   af:'Data Science, Mathematics', afKo:'데이터사이언스·수학과', email:'jangseol@ajou.ac.kr', photo:'seol-jang.jpg'},
+  {name:'Jihyun Park',   nameKo:'박지현', af:'Mathematics', afKo:'수학과', email:'jhn1105@gmail.com', photo:'jihyun-park.jpg', scholar:'', orcid:''},
+  {name:'Sung-Inn Pyo',  nameKo:'표성인', af:'Data Science, Mathematics', afKo:'데이터사이언스·수학과', email:'luinn27@ajou.ac.kr', photo:'sung-inn-pyo.jpg', scholar:'', orcid:''},
+  {name:'Seol Jang',     nameKo:'장설',   af:'Data Science, Mathematics', afKo:'데이터사이언스·수학과', email:'jangseol@ajou.ac.kr', photo:'seol-jang.jpg', scholar:'', orcid:''},
 ];
 const ms = [
-  {name:'Yunho Song',    nameKo:'송윤호', af:'Mathematics', afKo:'수학과', email:'', photo:'yunho-song.jpg'},
-  {name:'Daehong Min',   nameKo:'민대홍', af:'Data Science, Mathematics', afKo:'데이터사이언스·수학과', email:'mdh3120@ajou.ac.kr', photo:'daehong-min.jpg'},
-  {name:'Seonyeop Kim',  nameKo:'김선엽', af:'Mathematics', afKo:'수학과', email:'semicolon135@ajou.ac.kr', photo:'seonyeop-kim.jpg'},
+  {name:'Yunho Song',    nameKo:'송윤호', af:'Mathematics', afKo:'수학과', email:'', photo:'yunho-song.jpg', scholar:'', orcid:''},
+  {name:'Daehong Min',   nameKo:'민대홍', af:'Data Science, Mathematics', afKo:'데이터사이언스·수학과', email:'mdh3120@ajou.ac.kr', photo:'daehong-min.jpg', scholar:'', orcid:''},
+  {name:'Seonyeop Kim',  nameKo:'김선엽', af:'Mathematics', afKo:'수학과', email:'semicolon135@ajou.ac.kr', photo:'seonyeop-kim.jpg', scholar:'', orcid:''},
 ];
 const ug = [
-  {name:'Dowoong Jeong', nameKo:'정도웅', af:'Mathematics', afKo:'수학과', email:'ken1535@ajou.ac.kr', photo:'dowoong-jeong.jpg'},
+  {name:'Dowoong Jeong', nameKo:'정도웅', af:'Mathematics', afKo:'수학과', email:'ken1535@ajou.ac.kr', photo:'dowoong-jeong.jpg', scholar:'', orcid:''},
 ];
 const alumni = [
   {name:'Hanyeol Ryu',  nameKo:'류한열', note:'M.S. 2017–2019 · DESILO'},
@@ -144,6 +144,9 @@ const alumni = [
 ];
 
 function initial(n){ return (n||'?').trim().charAt(0).toUpperCase(); }
+// SVG icons reused for the profile buttons
+const ICON_SCHOLAR = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.9V17h2V9L12 3zM5 13.2v3.5c0 1.7 3.1 3.3 7 3.3s7-1.6 7-3.3v-3.5l-7 3.8-7-3.8z"/></svg>';
+const ICON_ORCID   = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zM7.4 18H5.6V7.9h1.8V18zM6.5 6.6a1.1 1.1 0 110-2.2 1.1 1.1 0 010 2.2zm12 11.4h-1.8v-4.9c0-1.3-.5-2.2-1.6-2.2-.9 0-1.4.6-1.6 1.2-.1.2-.1.5-.1.8V18H9.9s.1-8.3 0-9.1h1.8v1.3c.2-.4 1-1 2.2-1 1.6 0 2.9 1.1 2.9 3.4V18z"/></svg>';
 function card(m){
   const img = m.photo
     ? `<img class="avatar" src="images/people/${m.photo}" alt="${m.name}"
@@ -155,10 +158,18 @@ function card(m){
   const af = m.afKo
     ? `<span data-en="${m.af}" data-ko="${m.afKo}">${m.af}</span>`
     : (m.af||'');
-  return `<div class="pcard">${img}
-    <div class="nm">${nm}</div>
-    <div class="af">${af}</div>
-    ${m.email?`<div class="em">${m.email}</div>`:''}
+  // profile buttons appear only when a URL is set
+  let links = '';
+  if(m.scholar) links += `<a class="plink" href="${m.scholar}" target="_blank" rel="noopener">${ICON_SCHOLAR}Google Scholar</a>`;
+  if(m.orcid)   links += `<a class="plink" href="${m.orcid}" target="_blank" rel="noopener">${ICON_ORCID}ORCID</a>`;
+  const profiles = links ? `<div class="profiles">${links}</div>` : '';
+  return `<div class="prow">${img}
+    <div>
+      <div class="nm">${nm}</div>
+      <div class="af">${af}</div>
+      ${m.email?`<div class="em">${m.email}</div>`:''}
+      ${profiles}
+    </div>
   </div>`;
 }
 document.getElementById('phd').innerHTML = phd.map(card).join('');
