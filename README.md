@@ -54,10 +54,13 @@ Settings → Pages → Source: Deploy from a branch → Branch: main / (root) �
 - 논문처럼 영어만 있는 항목은 `data-ko`가 없어도 됩니다(양쪽에서 영어로 표시).
 
 ## 메뉴·색상 등 공통 요소
-- 색/폰트: `assets/style.css` 맨 위 `:root` 변수에서 한 번에 변경.
+- 색: `assets/style.css` 맨 위 `:root` 변수에서 한 번에 변경.
+- 폰트: `assets/style.css`의 `:root`에 있는 `--font-body` / `--font-head` / `--font-mono`
+  세 줄만 바꾸면 사이트 전체 폰트가 바뀝니다. 현재 본문·제목은 Pretendard(한글 지원),
+  숫자·라벨은 JetBrains Mono. 다른 폰트로 바꾸려면 이 변수와 각 HTML 상단의
+  폰트 `<link>` 주소를 함께 교체하세요.
 - 상단 메뉴(nav)와 하단(footer)은 각 HTML 파일에 똑같이 들어있습니다.
   메뉴 항목을 바꾸려면 6개 파일의 `<!-- COMMON NAV -->` 블록을 동일하게 고쳐야 합니다.
-  (순수 HTML의 한계 — 자주 바뀌는 부분이 아니라 실무상 괜찮습니다.)
 
 ## 참고
 - ORCID, arXiv 링크는 임시입니다. `people.html`의 `.profiles`에서 실제 주소로 교체하세요.
